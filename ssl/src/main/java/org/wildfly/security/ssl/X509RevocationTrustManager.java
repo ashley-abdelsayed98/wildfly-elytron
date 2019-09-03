@@ -71,6 +71,12 @@ public class X509RevocationTrustManager extends X509ExtendedTrustManager {
                 params.addCertStore(store);
             }
 
+            if (builder.certs != null) {
+                CertStoreParameters csp = new CollectionCertStoreParameters(builder.certs);
+                CertStore store = CertStore.getInstance("Collection", csp);
+                params.addCertStore(store);
+            }
+
             CertPathBuilder cpb = CertPathBuilder.getInstance("PKIX");
             PKIXRevocationChecker rc = (PKIXRevocationChecker) cpb.getRevocationChecker();
 
@@ -177,6 +183,7 @@ public class X509RevocationTrustManager extends X509ExtendedTrustManager {
         private boolean onlyEndEntity = false;
         private boolean softFail = false;
         private boolean noFallback = false;
+        private Collection<X509Certificate> certs;
 
 
         private Builder() {}
@@ -288,6 +295,11 @@ public class X509RevocationTrustManager extends X509ExtendedTrustManager {
          */
         public Builder setNoFallback(boolean noFallback) {
             this.noFallback = noFallback;
+            return this;
+        }
+
+        public Builder setCertStore(Collection<X509Certificate> certs){
+            this.certs = certs;
             return this;
         }
 

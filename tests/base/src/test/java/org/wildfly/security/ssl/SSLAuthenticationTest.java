@@ -132,7 +132,7 @@ public class SSLAuthenticationTest {
     private static final File FIREFLY_REVOKED_PEM_CRL = new File(WORKING_DIR_CACRL, "firefly-revoked.pem");
     private static final File ICA_REVOKED_PEM_CRL = new File(WORKING_DIR_CACRL, "ica-revoked.pem");
     private static TestingOcspServer ocspServer = null;
-
+    private static ArrayList<X509Certificate> certs = new ArrayList<X509Certificate>();
     private static X509Certificate ocspResponderCertificate;
     /**
      * Get the key manager backed by the specified key store.
@@ -405,7 +405,7 @@ public class SSLAuthenticationTest {
         ocspCheckedGoodKeyStore.setCertificateEntry("ca", issuerCertificate);
         ocspCheckedGoodKeyStore.setCertificateEntry("ca2", intermediateIssuerCertificate);
         ocspCheckedGoodKeyStore.setCertificateEntry("ca3", anotherIntermediateIssuerCertificate);
-        ocspCheckedGoodKeyStore.setKeyEntry("checked", ocspCheckedGoodSigningKey, PASSWORD, new X509Certificate[]{ocspCheckedGoodCertificate, anotherIntermediateIssuerCertificate, intermediateIssuerCertificate, issuerCertificate});
+        ocspCheckedGoodKeyStore.setKeyEntry("checked", ocspCheckedGoodSigningKey, PASSWORD, new X509Certificate[]{ocspCheckedGoodCertificate});
         createTemporaryKeyStoreFile(ocspCheckedGoodKeyStore, OCSP_CHECKED_GOOD_FILE, PASSWORD);
 
         //prepareCrlFiles(intermediateIssuerCertificate, issuerSelfSignedX509CertificateAndSigningKey);
@@ -560,6 +560,11 @@ public class SSLAuthenticationTest {
         fireflyRevokedCrlOutput.close();
         icaRevokedCrlOutput.close();
 
+        certs.add(issuerCertificate);
+        certs.add(intermediateIssuerCertificate);
+        certs.add(anotherIntermediateIssuerCertificate);
+        certs.add(ocspCheckedGoodCertificate);
+        certs.add(ocspCheckedRevokedCertificate);
         ocspServer = new TestingOcspServer(OCSP_PORT);
         ocspServer.createIssuer(1, issuerCertificate);
         ocspServer.createIssuer(2, intermediateIssuerCertificate);
@@ -715,6 +720,7 @@ public class SSLAuthenticationTest {
                         .setTrustManagerFactory(getTrustManagerFactory())
                         .setTrustStore(createKeyStore("/ca/jks/ca.truststore"))
                         .setOcspResponderCert(ocspResponderCertificate)
+                        .setCertStore(certs)
                         .build())
                 .setNeedClientAuth(true)
                 .build().create();
@@ -733,7 +739,8 @@ public class SSLAuthenticationTest {
                         .setTrustManagerFactory(getTrustManagerFactory())
                         .setTrustStore(createKeyStore("/ca/jks/ca.truststore"))
                         .setOcspResponderCert(ocspResponderCertificate)
-                        .setMaxCertPath(0)
+                        .setCertStore(certs)
+                        .setMaxCertPath(1)
                         .build())
                 .setNeedClientAuth(true)
                 .build().create();
@@ -756,6 +763,7 @@ public class SSLAuthenticationTest {
                         .setTrustManagerFactory(getTrustManagerFactory())
                         .setTrustStore(createKeyStore("/ca/jks/ca.truststore"))
                         .setOcspResponderCert(ocspResponderCertificate)
+                        .setCertStore(certs)
                         .build())
                 .setClientMode(true)
                 .build().create();
