@@ -405,7 +405,7 @@ public class SSLAuthenticationTest {
         ocspCheckedGoodKeyStore.setCertificateEntry("ca", issuerCertificate);
         ocspCheckedGoodKeyStore.setCertificateEntry("ca2", intermediateIssuerCertificate);
         ocspCheckedGoodKeyStore.setCertificateEntry("ca3", anotherIntermediateIssuerCertificate);
-        ocspCheckedGoodKeyStore.setKeyEntry("checked", ocspCheckedGoodSigningKey, PASSWORD, new X509Certificate[]{ocspCheckedGoodCertificate});
+        ocspCheckedGoodKeyStore.setKeyEntry("checked", ocspCheckedGoodSigningKey, PASSWORD, new X509Certificate[]{ocspCheckedGoodCertificate, anotherIntermediateIssuerCertificate, intermediateIssuerCertificate, issuerCertificate});
         createTemporaryKeyStoreFile(ocspCheckedGoodKeyStore, OCSP_CHECKED_GOOD_FILE, PASSWORD);
 
         //prepareCrlFiles(intermediateIssuerCertificate, issuerSelfSignedX509CertificateAndSigningKey);
@@ -720,7 +720,7 @@ public class SSLAuthenticationTest {
                         .setTrustManagerFactory(getTrustManagerFactory())
                         .setTrustStore(createKeyStore("/ca/jks/ca.truststore"))
                         .setOcspResponderCert(ocspResponderCertificate)
-                        .setCertStore(certs)
+                        //.setCertStore(certs)
                         .build())
                 .setNeedClientAuth(true)
                 .build().create();
@@ -739,7 +739,7 @@ public class SSLAuthenticationTest {
                         .setTrustManagerFactory(getTrustManagerFactory())
                         .setTrustStore(createKeyStore("/ca/jks/ca.truststore"))
                         .setOcspResponderCert(ocspResponderCertificate)
-                        .setCertStore(certs)
+                        //.setCertStore(certs)
                         .setMaxCertPath(1)
                         .build())
                 .setNeedClientAuth(true)
@@ -763,7 +763,7 @@ public class SSLAuthenticationTest {
                         .setTrustManagerFactory(getTrustManagerFactory())
                         .setTrustStore(createKeyStore("/ca/jks/ca.truststore"))
                         .setOcspResponderCert(ocspResponderCertificate)
-                        .setCertStore(certs)
+                        //.setCertStore(certs)
                         .build())
                 .setClientMode(true)
                 .build().create();

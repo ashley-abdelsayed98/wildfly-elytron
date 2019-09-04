@@ -38,11 +38,14 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.CollectionCertStoreParameters;
 import java.security.cert.PKIXBuilderParameters;
+import java.security.cert.PKIXCertPathChecker;
 import java.security.cert.PKIXRevocationChecker;
 import java.security.cert.X509CertSelector;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -79,7 +82,6 @@ public class X509RevocationTrustManager extends X509ExtendedTrustManager {
 
             CertPathBuilder cpb = CertPathBuilder.getInstance("PKIX");
             PKIXRevocationChecker rc = (PKIXRevocationChecker) cpb.getRevocationChecker();
-
             if (builder.ocspResponderCert != null) {
                 rc.setOcspResponderCert(builder.ocspResponderCert);
             }
@@ -98,12 +100,20 @@ public class X509RevocationTrustManager extends X509ExtendedTrustManager {
                 options.add(PKIXRevocationChecker.Option.NO_FALLBACK);
             }
 
+            PKIXCertPathChecker certPathChecker = new MaxCertPathChecker(builder.maxCertPath);
+
             rc.setOptions(options);
             rc.setOcspResponder(builder.responderUri);
 
             params.setRevocationEnabled(true);
             params.addCertPathChecker(rc);
             params.setMaxPathLength(builder.maxCertPath);
+            List<PKIXCertPathChecker> checkerList = new ArrayList<PKIXCertPathChecker>();
+            checkerList.add(rc);
+            checkerList.add(certPathChecker);
+
+            params.setCertPathCheckers(checkerList);
+
 
             builder.trustManagerFactory.init(new CertPathTrustManagerParameters(params));
 
