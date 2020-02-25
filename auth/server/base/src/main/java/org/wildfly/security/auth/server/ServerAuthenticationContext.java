@@ -884,6 +884,7 @@ public final class ServerAuthenticationContext implements AutoCloseable {
                     String authorizationID = authorizeCallback.getAuthorizationID();
                     boolean authorized = authorizationID != null ? authorize(authorizationID) : authorize();
                     log.tracef("Handling AuthorizeCallback: authenticationID = %s  authorizationID = %s  authorized = %b", authenticationID, authorizationID, authorized);
+                    System.out.println("Setting authorized!?");
                     authorizeCallback.setAuthorized(authorized);
                     handleOne(callbacks, idx + 1);
                 } else if (callback instanceof  ExclusiveNameCallback) {

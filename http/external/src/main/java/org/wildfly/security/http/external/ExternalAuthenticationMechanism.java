@@ -19,6 +19,8 @@
 package org.wildfly.security.http.external;
 
 import static org.wildfly.security.http.HttpConstants.EXTERNAL_NAME;
+import static org.wildfly.security.http.HttpConstants.FORBIDDEN;
+import static org.wildfly.security.http.HttpConstants.OK;
 import static org.wildfly.security.mechanism._private.ElytronMessages.httpExternal;
 
 import java.io.IOException;
@@ -101,7 +103,7 @@ public class ExternalAuthenticationMechanism implements HttpServerAuthentication
     private void succeed(HttpServerRequest request) throws AuthenticationMechanismException {
         try {
             callbackHandler.handle(new Callback[] { AuthenticationCompleteCallback.SUCCEEDED });
-            request.authenticationComplete();
+            request.authenticationComplete(response -> response.setStatusCode(OK));
         } catch (Throwable t) {
             throw httpExternal.mechCallbackHandlerFailedForUnknownReason(t);
         }
@@ -110,7 +112,7 @@ public class ExternalAuthenticationMechanism implements HttpServerAuthentication
     private void fail(HttpServerRequest request) throws AuthenticationMechanismException {
         try {
             callbackHandler.handle(new Callback[]{AuthenticationCompleteCallback.FAILED});
-            request.authenticationFailed(httpExternal.authenticationFailed());
+            request.authenticationFailed(httpExternal.authenticationFailed(), response -> response.setStatusCode(FORBIDDEN));
         } catch (Throwable t) {
             throw httpExternal.mechCallbackHandlerFailedForUnknownReason(t);
         }
