@@ -372,6 +372,11 @@ public class HttpAuthenticator {
         }
 
         @Override
+        public String getRemoteUser() {
+            return httpExchangeSpi.getRemoteUser();
+        }
+
+        @Override
         public void authenticationInProgress(HttpServerMechanismsResponder responder) {
             authenticationAttempted = true;
             if (responder != null) {

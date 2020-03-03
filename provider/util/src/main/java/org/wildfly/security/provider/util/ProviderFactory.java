@@ -43,6 +43,7 @@ public class ProviderFactory {
             "org.wildfly.security.http.bearer.WildFlyElytronHttpBearerProvider",
             "org.wildfly.security.http.bearer.WildFlyElytronHttpClientCertProvider",
             "org.wildfly.security.http.bearer.WildFlyElytronHttpDigestProvider",
+            "org.wildfly.security.http.external.WildFlyElytronHttpExternalProvider",
             "org.wildfly.security.http.bearer.WildFlyElytronHttpFormProvider",
             "org.wildfly.security.http.bearer.WildFlyElytronHttpSpnegoProvider",
             "org.wildfly.security.key.WildFlyElytronKeyProvider",
