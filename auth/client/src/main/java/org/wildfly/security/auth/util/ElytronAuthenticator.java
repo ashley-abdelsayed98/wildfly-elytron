@@ -37,7 +37,6 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 
 import org.wildfly.security.auth.callback.CredentialCallback;
 import org.wildfly.security.auth.client.AuthenticationConfiguration;
-import org.wildfly.security.auth.client.AuthenticationContext;
 import org.wildfly.security.auth.client.AuthenticationContextConfigurationClient;
 import org.wildfly.security.credential.PasswordCredential;
 import org.wildfly.security.password.PasswordFactory;

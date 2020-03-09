@@ -475,7 +475,7 @@ public final class AuthenticationConfiguration {
         return setPort;
     }
 
-    String getWsHttpMechanism() {
+    public String getWsHttpMechanism() {
         if (webServicesProperties != null) {
             Object wsHttpMechanism = webServicesProperties.get("http-mechanism");
             if (wsHttpMechanism != null) {
@@ -485,7 +485,7 @@ public final class AuthenticationConfiguration {
         return null;
     }
 
-    String getWsSecurityType() {
+    public String getWsSecurityType() {
         if (webServicesProperties != null) {
             Object wsSecurityType = webServicesProperties.get("ws-security-type");
             if (wsSecurityType != null) {
@@ -599,7 +599,7 @@ public final class AuthenticationConfiguration {
         return keyManagerFactory;
     }
 
-    CredentialSource getCredentialSource() {
+    public CredentialSource getCredentialSource() {
         if (authenticationCredentialsForwardSecurityDomain != null) {
             return doPrivileged((PrivilegedAction<IdentityCredentials>) () -> authenticationCredentialsForwardSecurityDomain.getCurrentSecurityIdentity().getPrivateCredentials(), capturedAccessContext);
         } else {

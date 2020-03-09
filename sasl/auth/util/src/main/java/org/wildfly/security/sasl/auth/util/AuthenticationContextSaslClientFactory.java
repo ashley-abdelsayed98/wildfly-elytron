@@ -26,7 +26,6 @@ import javax.security.sasl.SaslClientFactory;
 import javax.security.sasl.SaslException;
 
 import org.wildfly.common.math.HashMath;
-import org.wildfly.security.auth.client.AuthenticationContext;
 import org.wildfly.security.sasl.util.AbstractDelegatingSaslClientFactory;
 
 /**

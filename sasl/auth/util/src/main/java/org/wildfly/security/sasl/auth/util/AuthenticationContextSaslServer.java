@@ -22,7 +22,6 @@ import javax.security.sasl.SaslException;
 import javax.security.sasl.SaslServer;
 
 import org.wildfly.common.function.ExceptionUnaryOperator;
-import org.wildfly.security.auth.client.AuthenticationContext;
 import org.wildfly.security.sasl.util.AbstractDelegatingSaslServer;
 
 /**

@@ -54,7 +54,6 @@ import org.wildfly.common.bytes.ByteStringBuilder;
 import org.wildfly.common.iteration.CodePointIterator;
 import org.wildfly.security.auth.SupportLevel;
 import org.wildfly.security.auth.client.AuthenticationConfiguration;
-import org.wildfly.security.auth.client.AuthenticationContext;
 import org.wildfly.security.auth.client.AuthenticationContextConfigurationClient;
 import org.wildfly.security.credential.BearerTokenCredential;
 import org.wildfly.security.credential.Credential;

@@ -46,7 +46,6 @@ import org.junit.Test;
 import org.wildfly.common.iteration.CodePointIterator;
 import org.wildfly.security.sasl.localuser.WildFlyElytronSaslLocalUserProvider;
 import org.wildfly.security.auth.client.AuthenticationConfiguration;
-import org.wildfly.security.auth.client.AuthenticationContext;
 import org.wildfly.security.auth.client.ClientUtils;
 import org.wildfly.security.auth.client.MatchRule;
 import org.wildfly.security.sasl.SaslMechanismSelector;

@@ -23,7 +23,6 @@ import java.security.spec.AlgorithmParameterSpec;
 import javax.security.auth.callback.CallbackHandler;
 
 import org.wildfly.security.auth.client.AuthenticationConfiguration;
-import org.wildfly.security.auth.client.AuthenticationContext;
 import org.wildfly.security.auth.client.ClientUtils;
 import org.wildfly.security.auth.client.MatchRule;
 import org.wildfly.security.password.Password;

@@ -46,7 +46,6 @@ import org.wildfly.common.iteration.ByteIterator;
 import org.wildfly.common.iteration.CodePointIterator;
 import org.wildfly.security.credential.store.WildFlyElytronCredentialStoreProvider;
 import org.wildfly.security.auth.client.AuthenticationConfiguration;
-import org.wildfly.security.auth.client.AuthenticationContext;
 import org.wildfly.security.auth.client.ClientUtils;
 import org.wildfly.security.auth.client.MatchRule;
 import org.wildfly.security.auth.server.IdentityCredentials;

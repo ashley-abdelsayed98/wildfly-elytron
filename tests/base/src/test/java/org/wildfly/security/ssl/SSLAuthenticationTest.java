@@ -81,7 +81,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.wildfly.security.auth.server.SecurityIdentity;
 import org.wildfly.security.password.WildFlyElytronPasswordProvider;
-import org.wildfly.security.auth.client.AuthenticationContext;
 import org.wildfly.security.auth.client.AuthenticationContextConfigurationClient;
 import org.wildfly.security.auth.realm.KeyStoreBackedSecurityRealm;
 import org.wildfly.security.auth.server.SecurityDomain;

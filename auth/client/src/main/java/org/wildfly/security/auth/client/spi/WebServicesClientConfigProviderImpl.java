@@ -22,7 +22,6 @@ import org.jboss.wsf.spi.metadata.config.ClientConfig;
 import org.jboss.wsf.spi.security.ClientConfigException;
 import org.jboss.wsf.spi.security.ClientConfigProvider;
 import org.wildfly.common.Assert;
-import org.wildfly.security.auth.client.AuthenticationContext;
 import org.wildfly.security.auth.client.AuthenticationContextConfigurationClient;
 
 import javax.net.ssl.SSLContext;

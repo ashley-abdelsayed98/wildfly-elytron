@@ -18,6 +18,8 @@
 
 package org.wildfly.security.auth.client;
 
+import org.wildfly.security.auth.util.AuthenticationContextService;
+
 /**
  * An interface which allows legacy configuration to take place if no Elytron client configuration is present in the
  * global configuration.
@@ -30,5 +32,5 @@ public interface LegacyConfiguration {
      *
      * @return the context, or {@code null} if none was found for this configuration
      */
-    AuthenticationContext getConfiguredAuthenticationContext();
+    AuthenticationContextService getConfiguredAuthenticationContext();
 }

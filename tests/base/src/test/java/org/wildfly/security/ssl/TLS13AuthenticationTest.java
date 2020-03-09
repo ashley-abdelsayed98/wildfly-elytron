@@ -60,7 +60,6 @@ import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.wildfly.security.WildFlyElytronProvider;
-import org.wildfly.security.auth.client.AuthenticationContext;
 import org.wildfly.security.auth.client.AuthenticationContextConfigurationClient;
 import org.wildfly.security.auth.realm.KeyStoreBackedSecurityRealm;
 import org.wildfly.security.auth.server.SecurityDomain;

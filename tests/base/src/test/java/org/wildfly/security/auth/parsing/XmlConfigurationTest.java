@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package org.wildfly.security.auth.client;
+package org.wildfly.security.auth.parsing;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -55,6 +55,7 @@ import org.wildfly.client.config.ClientConfiguration;
 import org.wildfly.client.config.ConfigXMLParseException;
 import org.wildfly.client.config.ConfigurationXMLStreamReader;
 import org.wildfly.security.SecurityFactory;
+import org.wildfly.security.auth.client.AuthenticationConfiguration;
 import org.wildfly.security.password.WildFlyElytronPasswordProvider;
 import org.wildfly.security.credential.X509CertificateChainPrivateCredential;
 import org.wildfly.security.credential.store.CredentialStoreBuilder;
@@ -266,38 +267,46 @@ public class XmlConfigurationTest {
         final SecurityFactory<AuthenticationContext> factory = ElytronXmlParser.parseAuthenticationClientConfiguration(openFile(xmlBytes, "authentication-client.xml"));
         AuthenticationContext ac = factory.create();
 
-        AuthenticationConfiguration ac3 = ac.authRuleMatching(new URI("http://host-3/"), null, null).getConfiguration();
+        RuleNodeProvider<AuthenticationConfiguration> rn3 = (RuleNodeProvider) ac.authRuleMatching(new URI("http://host-3/"), null, null);
+        AuthenticationConfiguration ac3 = rn3.getConfiguration();
         String[] filtered = ac3.saslMechanismSelector.apply(Arrays.asList("A", "B"), null).toArray(new String[]{});
         Assert.assertArrayEquals(new String[]{"A", "B"}, filtered);
 
-        AuthenticationConfiguration ac4 = ac.authRuleMatching(new URI("http://host-4/"), null, null).getConfiguration();
+        RuleNodeProvider<AuthenticationConfiguration> rn4 = (RuleNodeProvider) ac.authRuleMatching(new URI("http://host-4/"), null, null);
+        AuthenticationConfiguration ac4 = rn4.getConfiguration();
         filtered = ac4.saslMechanismSelector.apply(Arrays.asList("A", "B", "JBOSS-LOCAL-USER"), null).toArray(new String[]{});
         Assert.assertArrayEquals(new String[]{"A", "B"}, filtered);
 
-        AuthenticationConfiguration ac5 = ac.authRuleMatching(new URI("http://host-5/"), null, null).getConfiguration();
+        RuleNodeProvider<AuthenticationConfiguration> rn5 = (RuleNodeProvider) ac.authRuleMatching(new URI("http://host-5/"), null, null);
+        AuthenticationConfiguration ac5 = rn5.getConfiguration();
         filtered = ac5.saslMechanismSelector.apply(Arrays.asList("A", "B", "JBOSS-LOCAL-USER"), null).toArray(new String[]{});
         Assert.assertArrayEquals(new String[]{"A", "B"}, filtered);
 
         // ELY-1184
-        AuthenticationConfiguration ac7 = ac.authRuleMatching(new URI("http://host-7/"), null, null).getConfiguration();
+        RuleNodeProvider<AuthenticationConfiguration> rn7 = (RuleNodeProvider) ac.authRuleMatching(new URI("http://host-7/"), null, null);
+        AuthenticationConfiguration ac7 =rn7.getConfiguration();
         filtered = ac7.saslMechanismSelector.apply(Arrays.asList("SCRAM-SHA-1-PLUS",  "DIGEST-MD5", "SCRAM-SHA-512"), null).toArray(new String[]{});
         Assert.assertArrayEquals(new String[]{"SCRAM-SHA-1-PLUS", "SCRAM-SHA-512"}, filtered);
 
         // ELY-1185
-        AuthenticationConfiguration ac10 = ac.authRuleMatching(new URI("http://host-10/"), null, null).getConfiguration();
+        RuleNodeProvider<AuthenticationConfiguration> rn10 = (RuleNodeProvider) ac.authRuleMatching(new URI("http://host-10/"), null, null);
+        AuthenticationConfiguration ac10 = rn10.getConfiguration();
         filtered = ac10.saslMechanismSelector.apply(Arrays.asList("PLAIN", "DIGEST-MD5", "JBOSS-LOCAL-USER", "ABC"), null).toArray(new String[]{});
         Assert.assertArrayEquals(new String[]{"PLAIN", "DIGEST-MD5", "JBOSS-LOCAL-USER"}, filtered);
 
         // ELY-1216
-        AuthenticationConfiguration ac11 = ac.authRuleMatching(new URI("http://host-11/"), null, null).getConfiguration();
+        RuleNodeProvider<AuthenticationConfiguration> rn11 = (RuleNodeProvider) ac.authRuleMatching(new URI("http://host-11/"), null, null);
+        AuthenticationConfiguration ac11 = rn11.getConfiguration();
         filtered = ac11.saslMechanismSelector.apply(Arrays.asList("A", "B", "PLAIN"), null).toArray(new String[]{});
         Assert.assertArrayEquals(new String[]{"A", "B"}, filtered);
 
-        AuthenticationConfiguration ac12 = ac.authRuleMatching(new URI("http://host-12/"), null, null).getConfiguration();
+        RuleNodeProvider<AuthenticationConfiguration> rn12 = (RuleNodeProvider) ac.authRuleMatching(new URI("http://host-12/"), null, null);
+        AuthenticationConfiguration ac12 = rn12.getConfiguration();
         filtered = ac12.saslMechanismSelector.apply(Arrays.asList("A", "B", "PLAIN", "JBOSS-LOCAL-USER"), null).toArray(new String[]{});
         Assert.assertArrayEquals(new String[]{"JBOSS-LOCAL-USER"}, filtered);
 
-        AuthenticationConfiguration ac13 = ac.authRuleMatching(new URI("http://host-13/"), null, null).getConfiguration();
+        RuleNodeProvider<AuthenticationConfiguration> rn13 = (RuleNodeProvider) ac.authRuleMatching(new URI("http://host-13/"), null, null);
+        AuthenticationConfiguration ac13 = rn13.getConfiguration();
         filtered = ac13.saslMechanismSelector.apply(Arrays.asList("A", "B", "PLAIN", "DIGEST-MD5", "JBOSS-LOCAL-USER"), null).toArray(new String[]{});
         Assert.assertArrayEquals(new String[]{"A", "B", "JBOSS-LOCAL-USER"}, filtered);
     }
@@ -658,7 +667,7 @@ public class XmlConfigurationTest {
                 "    </authentication-client>\n" +
                 "</configuration>\n").getBytes(StandardCharsets.UTF_8);
         final SecurityFactory<AuthenticationContext> factory = ElytronXmlParser.parseAuthenticationClientConfiguration(openFile(xmlBytes, "authentication-client.xml"));
-        RuleNode<AuthenticationConfiguration> ac = factory.create().authRuleMatching(new URI("http://any/"), null, null);
+        RuleNodeProvider<AuthenticationConfiguration> ac = (RuleNodeProvider<AuthenticationConfiguration>) factory.create().authRuleMatching(new URI("http://any/"), null, null);
         assertNotNull(ac);
         X509CertificateChainPrivateCredential credential = ac.getConfiguration().getCredentialSource().getCredential(X509CertificateChainPrivateCredential.class);
         assertNotNull(credential);
@@ -762,7 +771,7 @@ public class XmlConfigurationTest {
                 "    </authentication-client>\n" +
                 "</configuration>\n").getBytes(StandardCharsets.UTF_8);
         final SecurityFactory<AuthenticationContext> factory = ElytronXmlParser.parseAuthenticationClientConfiguration(openFile(xmlBytes, "authentication-client.xml"));
-        RuleNode<AuthenticationConfiguration> ac = factory.create().authRuleMatching(new URI("http://any/"), null, null);
+        RuleNodeProvider<AuthenticationConfiguration> ac = (RuleNodeProvider<AuthenticationConfiguration>) factory.create().authRuleMatching(new URI("http://any/"), null, null);
         assertNotNull(ac);
         X509CertificateChainPrivateCredential credential = ac.getConfiguration().getCredentialSource().getCredential(X509CertificateChainPrivateCredential.class);
         assertNotNull(credential);

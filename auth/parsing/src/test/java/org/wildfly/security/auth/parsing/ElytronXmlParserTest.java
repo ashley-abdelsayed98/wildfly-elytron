@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.wildfly.security.auth.client;
+package org.wildfly.security.auth.parsing;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -41,6 +41,7 @@ import org.junit.Test;
 import org.wildfly.client.config.ConfigXMLParseException;
 import org.wildfly.security.SecurityFactory;
 import org.wildfly.security.WildFlyElytronProvider;
+import org.wildfly.security.auth.client.AuthenticationConfiguration;
 import org.wildfly.security.credential.PasswordCredential;
 import org.wildfly.security.password.Password;
 import org.wildfly.security.password.interfaces.ClearPassword;
@@ -149,7 +150,7 @@ public class ElytronXmlParserTest {
         URL config = getClass().getResource("test-wildfly-config-v1_4.xml");
         SecurityFactory<AuthenticationContext> authContext = ElytronXmlParser.parseAuthenticationClientConfiguration(config.toURI());
         Assert.assertNotNull(authContext);
-        RuleNode<AuthenticationConfiguration> node = authContext.create().authRuleMatching(new URI("http://masked/"), null, null);
+        RuleNode<AuthenticationConfiguration> node = (RuleNode<AuthenticationConfiguration>) authContext.create().authRuleMatching(new URI("http://masked/"), null, null);
         Assert.assertNotNull(node);
         Password password = node.getConfiguration().getCredentialSource().getCredential(PasswordCredential.class).getPassword();
         Assert.assertEquals(new String(PASSWORD), new String(((ClearPassword)password).getPassword()));

@@ -36,7 +36,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.wildfly.common.iteration.CodePointIterator;
 import org.wildfly.security.auth.client.AuthenticationConfiguration;
-import org.wildfly.security.auth.client.AuthenticationContext;
 import org.wildfly.security.auth.client.AuthenticationContextConfigurationClient;
 import org.wildfly.security.auth.client.MatchRule;
 import org.wildfly.security.auth.util.ElytronAuthenticator;

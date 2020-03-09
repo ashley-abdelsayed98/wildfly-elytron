@@ -114,6 +114,10 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.wildfly.security</groupId>
+            <artifactId>wildfly-elytron-auth-parsing</artifactId>
+        </dependency>
     </dependencies>
     
 </project>

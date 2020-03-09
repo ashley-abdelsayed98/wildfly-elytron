@@ -21,7 +21,6 @@ package org.wildfly.security.sasl.auth.util;
 import javax.security.sasl.SaslClient;
 import javax.security.sasl.SaslException;
 
-import org.wildfly.security.auth.client.AuthenticationContext;
 import org.wildfly.security.sasl.util.AbstractDelegatingSaslClient;
 
 /**

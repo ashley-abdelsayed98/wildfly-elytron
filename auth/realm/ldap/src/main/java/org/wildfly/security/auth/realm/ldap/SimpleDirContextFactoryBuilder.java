@@ -43,7 +43,6 @@ import org.wildfly.common.array.Arrays2;
 import org.wildfly.security.SecurityFactory;
 import org.wildfly.security.auth.callback.CredentialCallback;
 import org.wildfly.security.auth.client.AuthenticationConfiguration;
-import org.wildfly.security.auth.client.AuthenticationContext;
 import org.wildfly.security.auth.client.AuthenticationContextConfigurationClient;
 import org.wildfly.security.credential.PasswordCredential;
 import org.wildfly.security.credential.source.CredentialSource;

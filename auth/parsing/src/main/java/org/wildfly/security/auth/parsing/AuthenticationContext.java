@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package org.wildfly.security.auth.client;
+package org.wildfly.security.auth.parsing;
 
 import static java.security.AccessController.doPrivileged;
 
@@ -26,9 +26,7 @@ import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
 import java.util.function.ObjIntConsumer;
 import java.util.function.Supplier;
-
 import javax.net.ssl.SSLContext;
-
 import org.wildfly.common.context.ContextManager;
 import org.wildfly.common.context.Contextual;
 import org.wildfly.common.function.ExceptionObjIntConsumer;
@@ -37,13 +35,16 @@ import org.wildfly.security.ParametricPrivilegedAction;
 import org.wildfly.security.ParametricPrivilegedExceptionAction;
 import org.wildfly.security.SecurityFactory;
 import org.wildfly.security.Version;
+import org.wildfly.security.auth.client.AuthenticationConfiguration;
+import org.wildfly.security.auth.client.MatchRule;
+import org.wildfly.security.auth.util.AuthenticationContextService;
 
 /**
  * A set of rules and authentication configurations to use with a client for establishing a connection.
  *
  * @author <a href="mailto:david.lloyd@redhat.com">David M. Lloyd</a>
  */
-public final class AuthenticationContext implements Contextual<AuthenticationContext> {
+public final class AuthenticationContext implements Contextual<AuthenticationContext>, AuthenticationContextService {
 
     private static final ContextManager<AuthenticationContext> CONTEXT_MANAGER = new ContextManager<AuthenticationContext>(AuthenticationContext.class);
 
@@ -63,7 +64,7 @@ public final class AuthenticationContext implements Contextual<AuthenticationCon
         this(null, null);
     }
 
-    AuthenticationContext(final RuleNode<AuthenticationConfiguration> authRules, final RuleNode<SecurityFactory<SSLContext>> sslRules) {
+    protected AuthenticationContext(final RuleNode<AuthenticationConfiguration> authRules, final RuleNode<SecurityFactory<SSLContext>> sslRules) {
         this.authRules = authRules;
         this.sslRules = sslRules;
     }

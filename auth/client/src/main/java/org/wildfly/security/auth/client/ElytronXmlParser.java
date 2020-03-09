@@ -131,6 +131,7 @@ import org.wildfly.security.ssl.X509RevocationTrustManager;
  *
  * @author <a href="mailto:david.lloyd@redhat.com">David M. Lloyd</a>
  */
+@Deprecated
 public final class ElytronXmlParser {
 
     private static final Supplier<Provider[]> ELYTRON_PROVIDER_SUPPLIER = ProviderFactory.getElytronProviderSupplier(ElytronXmlParser.class.getClassLoader());
