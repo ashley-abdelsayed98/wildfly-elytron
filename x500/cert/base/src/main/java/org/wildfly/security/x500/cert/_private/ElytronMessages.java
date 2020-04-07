@@ -40,7 +40,8 @@ import org.wildfly.security.asn1.ASN1Exception;
 @ValidIdRanges({
     @ValidIdRange(min = 3010, max = 3033),
     @ValidIdRange(min = 7001, max = 7004),
-    @ValidIdRange(min = 10000, max = 10024)
+    @ValidIdRange(min = 10000, max = 10024),
+    @ValidIdRange(min = 16000, max = 16999)
 })
 public interface ElytronMessages extends BasicLogger {
 
@@ -138,5 +139,11 @@ public interface ElytronMessages extends BasicLogger {
 
     @Message(id = 10024, value = "Invalid X.509 certificate extension string value")
     IllegalArgumentException invalidCertificateExtensionStringValue();
+
+    @Message(id = 16000, value = "Malformed OpenSSH Private Key: %s")
+    IllegalArgumentException openSshParseError(String e);
+
+    @Message(id = 16001, value = "Unable to Generate Key: %s")
+    IllegalArgumentException openSshGeneratingError(String e);
 }
 
