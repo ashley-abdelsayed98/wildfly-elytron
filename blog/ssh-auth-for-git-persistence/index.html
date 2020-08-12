@@ -155,8 +155,6 @@ start the standalone server with an SSH git repository to manage your configurat
 <li><a href="#generating-ssh-keys-using-the-openssh-command-line-tool">Generating SSH keys using the OpenSSH command line tool</a>
 <ul class="sectlevel2">
 <li><a href="#the-wildfly-config-xml-configuration-2">The <code>wildfly-config.xml</code> configuration</a></li>
-<li><a href="#key-pair-credential">Key Pair Credential</a></li>
-<li><a href="#ssh-credential">SSH credential</a></li>
 </ul>
 </li>
 <li><a href="#connecting-to-a-git-repo">Connecting to a git repo</a></li>
@@ -280,9 +278,8 @@ Your public key has been saved in /home/user/.ssh/id_ecdsa.pub.</code></pre>
 <div class="paragraph">
 <p>If you already have SSH keys generated, you can add them as credentials a couple of ways:</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="key-pair-credential"><a class="anchor" href="#key-pair-credential"></a>Key Pair Credential</h3>
+<div class="sect3">
+<h4 id="key-pair-credential"><a class="anchor" href="#key-pair-credential"></a>Key Pair Credential</h4>
 <div class="paragraph">
 <p>One way is to specify your keys directly in the <code>wildfly-config.xml</code> using a <code>key-pair</code> credential as follows:</p>
 </div>
@@ -328,8 +325,8 @@ that is required to decrypt the key as a <code>clear-password</code> type, but w
 <p>Elytron also supports keys in PKCS8 format, but they must not be encrypted with a passphrase.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="ssh-credential"><a class="anchor" href="#ssh-credential"></a>SSH credential</h3>
+<div class="sect3">
+<h4 id="ssh-credential"><a class="anchor" href="#ssh-credential"></a>SSH credential</h4>
 <div class="paragraph">
 <p>The other way to add existing keys as credentials is to specify the location and file name containing your private keys
 using a <code>ssh-credential</code> as follows:</p>
@@ -381,6 +378,7 @@ to use the <code>ssh-credential</code> to specify its location.</p>
 <div class="paragraph">
 <p>For more information on the <code>key-pair</code> credential and <code>ssh-credential</code> check out the
 <a href="https://github.com/wildfly/wildfly/blob/master/docs/src/main/asciidoc/_client-guide/authentication-client.adoc">Elytron Authentication Client Documentation</a></p>
+</div>
 </div>
 </div>
 </div>
