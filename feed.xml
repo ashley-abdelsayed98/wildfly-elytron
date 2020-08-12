@@ -5,7 +5,7 @@
         <title>WildFly Elytron</title>
         <link>https://wildfly-security.github.io/wildfly-elytron</link>
         <description>WildFly Elytron: Security, Authentication, and Authorization SPIs for the WildFly project</description>
-        <lastBuildDate>Wed, 12 Aug 2020 18:15:37 +0000</lastBuildDate>
+        <lastBuildDate>Wed, 12 Aug 2020 20:29:52 +0000</lastBuildDate>
         
         <item>
             <title>SSH Authentication with Git Persistence</title>
@@ -18,6 +18,20 @@
             <pubDate>Wed, 12 Aug 2020 00:00:00 +0000</pubDate>
             <guid>
                 https://wildfly-security.github.io/wildfly-elytron/blog/ssh-auth-for-git-persistence/
+            </guid>
+        </item>
+        
+        <item>
+            <title>HTTP External Mechanism</title>
+            <link>
+                https://wildfly-security.github.io/wildfly-elytron/blog/http-external-mechanism/
+            </link>
+            <description>
+                WildFly Elytron now supports authenticating users with the External HTTP mechanism. This means if you have users authenticated by an Apache httpd server, these users can be forwarded to WildFly via the AJP protocol. This can be done by setting up Elytron to secure a WildFly deployment and specifying for...
+            </description>
+            <pubDate>Wed, 12 Aug 2020 00:00:00 +0000</pubDate>
+            <guid>
+                https://wildfly-security.github.io/wildfly-elytron/blog/http-external-mechanism/
             </guid>
         </item>
         
@@ -130,20 +144,6 @@
             <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
             <guid>
                 https://wildfly-security.github.io/wildfly-elytron/blog/elytron-acme-client-implementation/
-            </guid>
-        </item>
-        
-        <item>
-            <title>Server Side SNI Matching with WildFly</title>
-            <link>
-                https://wildfly-security.github.io/wildfly-elytron/blog/server-side-sni-matching-with-wildfly/
-            </link>
-            <description>
-                For quite some time now, WildFly has provided support for server side Server Name Indication (SNI) matching. This allows a WildFly instance with multiple virtual hosts that share a single IP address to present the correct certificate depending on the server name specified by the client via the SNI extension....
-            </description>
-            <pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate>
-            <guid>
-                https://wildfly-security.github.io/wildfly-elytron/blog/server-side-sni-matching-with-wildfly/
             </guid>
         </item>
         
