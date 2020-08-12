@@ -144,6 +144,24 @@ with SSH servers as well.</p>
 This blog will describe how to generate SSH keys and add them as credentials in a <code>wildfly-config.xml</code> file and how to
 start the standalone server with an SSH git repository to manage your configuration file history.</p>
 </div>
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#generating-ssh-keys-using-the-elytron-tool">Generating SSH keys using the Elytron Tool</a>
+<ul class="sectlevel2">
+<li><a href="#the-wildfly-config-xml-configuration">The <code>wildfly-config.xml</code> configuration</a></li>
+</ul>
+</li>
+<li><a href="#generating-ssh-keys-using-the-openssh-command-line-tool">Generating SSH keys using the OpenSSH command line tool</a>
+<ul class="sectlevel2">
+<li><a href="#the-wildfly-config-xml-configuration-2">The <code>wildfly-config.xml</code> configuration</a></li>
+<li><a href="#key-pair-credential">Key Pair Credential</a></li>
+<li><a href="#ssh-credential">SSH credential</a></li>
+</ul>
+</li>
+<li><a href="#connecting-to-a-git-repo">Connecting to a git repo</a></li>
+</ul>
+</div>
 <div class="sect1">
 <h2 id="generating-ssh-keys-using-the-elytron-tool"><a class="anchor" href="#generating-ssh-keys-using-the-elytron-tool"></a>Generating SSH keys using the Elytron Tool</h2>
 <div class="sectionbody">
