@@ -5,19 +5,19 @@
         <title>WildFly Elytron</title>
         <link>https://wildfly-security.github.io/wildfly-elytron</link>
         <description>WildFly Elytron: Security, Authentication, and Authorization SPIs for the WildFly project</description>
-        <lastBuildDate>Fri, 07 Aug 2020 16:07:17 +0000</lastBuildDate>
+        <lastBuildDate>Wed, 12 Aug 2020 18:15:37 +0000</lastBuildDate>
         
         <item>
-            <title></title>
+            <title>SSH Authentication with Git Persistence</title>
             <link>
-                https://wildfly-security.github.io/wildfly-elytron/blog/2020-08-06-ssh-auth-for-git-persistence/
+                https://wildfly-security.github.io/wildfly-elytron/blog/ssh-auth-for-git-persistence/
             </link>
             <description>
                 When using a standalone WildFly server, it is currently possible to manage your configuration file history using a git repository. While previously it was only possible to connect to HTTP git servers, it is now possible to establish a connection with SSH servers as well. In order to connect to...
             </description>
-            <pubDate>Fri, 07 Aug 2020 16:07:17 +0000</pubDate>
+            <pubDate>Wed, 12 Aug 2020 00:00:00 +0000</pubDate>
             <guid>
-                https://wildfly-security.github.io/wildfly-elytron/blog/2020-08-06-ssh-auth-for-git-persistence/
+                https://wildfly-security.github.io/wildfly-elytron/blog/ssh-auth-for-git-persistence/
             </guid>
         </item>
         
